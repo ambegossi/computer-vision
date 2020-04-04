@@ -19,8 +19,14 @@ p4i = [130 500]; // Base da unha do polegar
 Res = zeros(nl,nc);
 M = zeros(8,8);
 
+%{
 pf = [134;129;526;414;088;459;252;033];
 pi = [302;173;500;500;106;345;287;130];
+Montar a imagem resultado com base nos pontos da imagem de entrada.
+%}
+
+pi = [134;129;526;414;088;459;252;033];
+pf = [302;173;500;500;106;345;287;130];
 
 for i=1:1:4
     M(i,1) = pi(i);
@@ -43,7 +49,7 @@ end
         cf = fix(cf);
         lf = fix(lf);
         if (lf>0 && lf<nl && cf>0 && cf<nc)
-            Res(lf,cf) = im_in(i,j);
+            Res(i,j) = im_in(lf,cf);
         end
     end
  end
