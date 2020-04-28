@@ -35,15 +35,17 @@ end
 res = uint8(neg1);
 imwrite(res,'ex2.bmp');
 
-% 3) ????
-im_in = imread('ex2.bmp')
-im_in = double(im_in)
+% 3) 
+im_in = imread('ex2.bmp');
+im_in = double(im_in);
 
-res = im_in - 55;
-nres = 255 * (res / 125);
+p1 = [60 10];
+p2 = [130 240];
 
-nres = uint8(nres);
-imwrite(nres,'ex3.bmp');
+res = transf_linear(im_in,p1,p2);
+
+res = uint8(res);
+imwrite(res,'ex3.bmp');
 
 % 4)
 im_in = imread('im_in.bmp')

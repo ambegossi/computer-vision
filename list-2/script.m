@@ -93,9 +93,12 @@ imwrite(res,'4b.bmp');
 % 5)
 fg = imread('fg00009.bmp')
 fg = double(fg);
-res = rotate(fg, 30);
+[tx ty] = size(fg);
+res = translate(fg,tx,ty);
+res = rotate(res, 30);
+res = translate(res, -tx,-ty/2);
 res = uint8(res);
-imwrite(res,'5.bmp');
+imwrite(res,'5trans.bmp');
 
 % 6) 
 fg = imread('fg00009.bmp')
