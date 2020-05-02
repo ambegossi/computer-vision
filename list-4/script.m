@@ -58,7 +58,7 @@ img1 = imread('parafuso2.jpg')
 img1 = double(img1)
 
 X1 = fft2(img1); 
-X1 = fftshift(X1);
+X2 = fft2(img2);
 
 [I3r I3i] = pol2cart(angle(X2),abs(X1));
 i3 = real(ifft2(I3r+I3i*1i));
@@ -67,3 +67,62 @@ i3 = i3 - min(min(i3));
 i3 = 255 * (i3 / max(max(i3)));
 
 imwrite(uint8(i3),'ex2-i3.bmp');
+
+% Exercício 3 -----------------------------------------------------
+img = imread('parafuso2.jpg')
+img = double(img)
+
+% Filtragem no domínio espacial
+mask = [1/25 1/25 1/25 1/25 1/25; 
+        1/25 1/25 1/25 1/25 1/25; 
+        1/25 1/25 1/25 1/25 1/25; 
+        1/25 1/25 1/25 1/25 1/25;
+        1/25 1/25 1/25 1/25 1/25];
+
+tic
+res = convolution(img, mask);
+toc
+
+% Elapsed time is 0.078093 seconds.
+
+imwrite(uint8(res),'ex3-conv.bmp');
+
+% Filtragem no domínio da frequência
+
+[nli nci] = size(img);
+[nlm ncm] = size(mask);
+
+sd = (nli + nlm) - 1;
+
+Xp = zeros(sd,sd);
+Mp = zeros(sd,sd);
+
+% Zero padding
+for i = 1:1:nli
+    for j = 1:1:nci
+        Xp(i,j) = img(i,j);
+    end
+end
+
+% Zero padding
+for i = 1:1:nlm
+    for j = 1:1:ncm
+        Mp(i,j) = mask(i,j);
+    end
+end
+
+tic
+Xp = fftshift(fft2(Xp));
+Mp = fftshift(fft2(Mp));
+
+r = Xp .* Mp;
+r = ifft2(r);
+toc
+
+ifftshow(r);
+
+% Filtragem no domínio espacial
+% Elapsed time is 0.078093 seconds.
+
+% Filtragem no domínio da frequência
+% Elapsed time is 0.008143 seconds.
