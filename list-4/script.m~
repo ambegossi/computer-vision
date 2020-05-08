@@ -144,6 +144,11 @@ for i = nl:1:nl+60
     end
 end
 
-r = ifft2(Xp);
+% r = ifft2(Xp);
 
-ifftshow(r);
+r = real(ifft2(Xp));
+% Ajuste da faixa dinâmica
+r = r - min(min(r));
+r = 255 * (r / max(max(r)));
+
+imwrite(uint8(r),'ex4.bmp');
