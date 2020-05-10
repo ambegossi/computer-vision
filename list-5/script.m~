@@ -75,4 +75,4 @@ imwrite(uint8(res),'ex4.bmp');
 
 
 % Tem um bom desempenho para o ruído gaussiano.
-% Funciona bem para o ruído de sal, mas não para o de pimenta.
+% Funciona bem para o 
