@@ -11,7 +11,7 @@ res = zeros(nl,nc);
 for i = 1:1:nl
     for j = 1:1:nc
         covered = 1;
-        if(img(i,j)==255)
+        if(img(i,j)==1)
             elemi = 1;
             for k=i - pivot:1:(i-pivot)+nle-1
                 if (covered == 0)
@@ -19,12 +19,14 @@ for i = 1:1:nl
                 end
                 elemj = 1;
                 for l=j - pivot:1:(j-pivot)+nce-1
-                    if (((k<1 || k>nl) || (l<1 || l>nc)) && elem(elemi,elemj)==1)
-                        covered = 0;
-                        break;
-                    elseif(img(k,l)==0 && elem(elemi,elemj)==1)
-                        covered = 0;
-                        break;
+                    if(elem(elemi,elemj)==1)
+                        if (((k<1 || k>nl) || (l<1 || l>nc)))
+                            covered = 0;
+                            break;
+                        elseif(img(k,l)==0)
+                            covered = 0;
+                            break;
+                        end  
                     end
                     elemj = elemj + 1;
                 end
@@ -33,7 +35,7 @@ for i = 1:1:nl
             if(covered == 0)
                 res(i,j)=0;
             else
-                res(i,j)=255;
+                res(i,j)=1;
             end
         end
 

@@ -16,3 +16,20 @@ elem = [0 1 0; 1 1 1; 0 1 0]
 
 res = dilation(img,elem);
 imwrite(res,'ex2.tif');
+
+% Exercício 3 -----------------------------------------------------
+% a) Opening
+img = imread('text.tif')
+
+elem = [0 1 0; 1 1 1; 0 1 0];
+
+res = opening(img,elem);
+imwrite(res,'ex3a.tif');
+
+% b) Closing
+img = imread('text.tif')
+
+elem = [0 1 0; 1 1 1; 0 1 0];
+
+res = closing(img,elem);
+imwrite(res,'ex3b.tif');
